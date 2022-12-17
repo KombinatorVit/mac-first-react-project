@@ -2,20 +2,20 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
-  baseURL: "https://nestjs-boilerplate-test.fly.dev"
+    baseURL: "https://nestjs-boilerplate-test.fly.dev"
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const authToken = Cookies.get("auth-token");
+    (config) => {
+        const authToken = Cookies.get("auth-token");
 
-    if (authToken) {
-      config.headers.authorization = `Bearer ${authToken}`;
-    }
+        if (authToken) {
+            config.headers.authorization = `Bearer ${authToken}`;
+        }
 
-    return config;
-  },
-  (error) => Promise.reject(error)
+        return config;
+    },
+    (error) => Promise.reject(error)
 );
 
 export default axiosInstance;
